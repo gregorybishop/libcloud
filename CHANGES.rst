@@ -1,8 +1,8 @@
 ﻿Changelog
 =========
 
-Changes with latest version of Apache Libcloud
-----------------------------------------------
+Changes with Apache Libcloud in 1.0.0
+-------------------------------------
 
 General
 ~~~~~~~
@@ -21,8 +21,17 @@ General
   (GITHUB-744)
   [Lionel Schaub]
 
+- Add support for authenticating against Keystone and OpenStack based clouds
+  using OpenID Connect tokens.
+  (GITHUB-789)
+  [Miguel Caballer]
+
 Compute
 ~~~~~~~
+
+- GCE nodes can be launched in a subnetwork
+  (GITHUB-783)
+  [Lars Larsson]
 
 - Add Subnetworks to GCE driver
   (GITHUB-780)
@@ -56,13 +65,54 @@ Compute
   v2 driver.
   [Tomaz Muraus]
 
+- Update libvirt driver so it returns false if a non-local libvirt URL is used
+  (right now only local instances are supported).
+  (LIBCLOUD-820, GITHUB-788)
+  [René Kjellerup]
+
+- Update libvirt driver to use `ip neight` command instead of `arp` to retrieve
+  node MAC address if `arp` command is not available or the current user
+  doesn't have permission to use it.
+  (LIBCLOUD-820, GITHUB-788)
+  [René Kjellerup]
+
+- Update ``create_volume`` method in the CloudStack driver and add
+  ``ex_volume_type`` argument to it. If this argument is provided, a volume
+  which names matches this argument value will be searched and selected among
+  the available disk offerings.
+  (GITHUB-785)
+  [Greg Bishop]
+
+Storage
+~~~~~~~
+
+- Add support for AWS signature v4 to the Outscale storage driver.
+  (GITHUB-736)
+  [Javier M. Mellid]
+
+
+- Add new S3 RGW storage driver.
+  (GITHUB-786, GITHUB-792)
+  [Javier M. Mellid]
+
+Loadbalancer
+~~~~~~~~~~~~
+
+- Update AWS ELB driver to use signature version 4 for authentication. This
+  way, the driver also work with the `eu-central-1` region.
+  (GITHUB-796)
+  [Tobias Paepke]
+
 DNS
 ~~~
 
-- Added BuddyNS driver
+- Add BuddyNS driver.
   (GITHUB-742)
   [Oltjano Terpollari]
 
+- Added DNSPod driver (https://www.dnspod.com).
+  (GITHUB-787)
+  [Oltjano Terpollari]
 
 Changes with Apache Libcloud in 1.0.0-rc2
 -----------------------------------------
@@ -181,7 +231,7 @@ Compute
 
 - New driver for Aliyun Elastic Compute Service.
   (LIBCLOUD-802, GITHUB-712)
-  [Sam Song]
+  [Sam Song, Heng Wu]
 
 Storage
 ~~~~~~~
